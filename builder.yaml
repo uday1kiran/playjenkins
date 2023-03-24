@@ -1,26 +1,49 @@
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: kaniko
+#spec:
+#  containers:
+#  - name: kubectl
+#    image: joshendriks/alpine-k8s
+#    command:
+#    - /bin/cat
+#    tty: true    
+ # - name: kaniko
+ #  image: gcr.io/kaniko-project/executor:debug
+ #   command:
+ #   - /busybox/cat
+ #   tty: true
+ #  volumeMounts:
+ #     - name: kaniko-secret
+ #       mountPath: /kaniko/.docker
+ # volumes:
+ #   - name: kaniko-secret
+ #     secret:
+ #       secretName: regcred
+ #       items:
+ #         - key: .dockerconfigjson
+ #           path: config.json
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kaniko
+  name: nginx
 spec:
   containers:
-  - name: kubectl
-    image: joshendriks/alpine-k8s
-    command:
-    - /bin/cat
-    tty: true    
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command:
-    - /busybox/cat
-    tty: true
+  - name: tomcat
+    image: tomcat:latest
+    ports:
+    - containerPort: 8080
+    env:
+    - name: DOCKER_HOST
+      value: tcp://localhost:2375
+  - name: dind
+    image: docker:18.05-dind
+    securityContext:
+      privileged: true
     volumeMounts:
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
+      - name: dind-storage
+        mountPath: /var/lib/docker
   volumes:
-    - name: kaniko-secret
-      secret:
-        secretName: regcred
-        items:
-          - key: .dockerconfigjson
-            path: config.json
+    - name: dind-storage
+      emptyDir: {}
