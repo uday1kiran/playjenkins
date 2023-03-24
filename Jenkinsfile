@@ -12,15 +12,18 @@ pipeline {
 
   stages {
 
-    stage('Kaniko Build & Push Image') {
+    stage('Dockerdind Build & Push Image') {
       steps {
-        container('kaniko') {
+        container('tomcat') {
           script {
             sh '''
-            /kaniko/executor --dockerfile `pwd`/Dockerfile \
-                             --context `pwd` \
-                             --destination=uday1kiran/myweb:${BUILD_NUMBER}
+            yum update -y &&
+            yum install -y yum-utils &&
+            yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo &&
+            yum update -y &&
+            yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             '''
+            sh 'docker run hello-world'
           }
         }
       }
