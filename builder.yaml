@@ -31,7 +31,12 @@ metadata:
 spec:
   containers:
   - name: tomcat
-    image: docker #uday1kiran/centos:corretto-e8f70a5
+    image: docker uday1kiran/centos:corretto-e8f70a5
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: dind-storage
+        mountPath: /var/lib/docker
     ports:
     - containerPort: 8080
     env:
