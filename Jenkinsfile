@@ -16,14 +16,19 @@ pipeline {
       steps {
         container('tomcat') {
           script {
-            sh '''
+            /*sh '''
             yum update -y &&
             yum install -y yum-utils &&
             yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo &&
             yum update -y &&
             yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            '''*/
+            sh '''
+            docker image ls &&
+            docker container ps -a &&
+            docker run hello-world &&
+            docker container ps
             '''
-            sh 'docker run hello-world'
           }
         }
       }
