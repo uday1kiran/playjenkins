@@ -32,7 +32,7 @@ pipeline {
             aws --version &&
             java -version &&
             whereis aws &&
-            whereis java &&
+            whereis java
             '''
           }
         }
