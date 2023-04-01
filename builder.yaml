@@ -31,7 +31,7 @@ metadata:
 spec:
   containers:
   - name: tomcat
-    image: uday1kiran/centos:corretto-f02106b
+    image: uday1kiran/centos:corretto-5317372
     ports:
     - containerPort: 8080
     env:
