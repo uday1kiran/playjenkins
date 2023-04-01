@@ -12,7 +12,7 @@ pipeline {
 
   stages {
 
-    stage('Dockerdind Build & Push Image') {
+    stage('Dockerdind Check') {
       steps {
         container('tomcat') {
           script {
@@ -37,8 +37,24 @@ pipeline {
         }
       }
     }
+    
+    stage('Dockerdind Build and Push') {
+      steps {
+        container('tomcat') {
+          script {
+            sh '''
+            ls -la
+            ls -lRt
+            docker image ls
+            docker build -t testimage:latest .
+            docker image ls
+            '''
+          }
+        }
+      }
+    }
 
-    stage('Deploy App to Kubernetes') {     
+    /*stage('Deploy App to Kubernetes') {     
       steps {
         container('kubectl') {
           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
@@ -47,7 +63,7 @@ pipeline {
           }
         }
       }
-    }
+    }*/
   
   }
 }
