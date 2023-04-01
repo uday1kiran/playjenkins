@@ -46,7 +46,7 @@ pipeline {
             ls -la
             ls -lRt
             docker image ls
-            docker build -t testimage:latest .
+            DOCKER_BUILDKIT=1 docker build -t testimage:latest .
             docker image ls
             '''
           }
