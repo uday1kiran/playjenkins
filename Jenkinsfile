@@ -24,6 +24,10 @@ pipeline {
             yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             '''*/
             sh '''
+            aws --version &&
+            java -version &&
+            whereis aws &&
+            whereis java &&
             docker image ls &&
             docker container ps -a &&
             docker run hello-world &&
