@@ -24,14 +24,15 @@ pipeline {
             yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             '''*/
             sh '''
+            docker image ls &&
+            docker container ps -a &&
+            docker run hello-world &&
+            docker container ps &&
+            whereis yum && whereis apt && whereis apk && whereis pacman &&
             aws --version &&
             java -version &&
             whereis aws &&
             whereis java &&
-            docker image ls &&
-            docker container ps -a &&
-            docker run hello-world &&
-            docker container ps
             '''
           }
         }
