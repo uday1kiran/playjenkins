@@ -53,11 +53,11 @@ pipeline {
                     sh 'docker image ls'
                     sh 'docker tag uday1kiran/testimage:${env.BRANCH_NAME}  uday1kiran/testimage:${env.BRANCH_NAME}-${env.shortCommitId}'
                     sh 'docker push uday1kiran/testimage:${env.BRANCH_NAME}-${env.shortCommitId}'
-              #script{
-              #def shortCommitId = "${env.GIT_COMMIT}".take(7)
-               #sh 'docker tag uday1kiran/testimage:${env.GIT_BRANCH} uday1kiran/testimage:${env.GIT_BRANCH}-${shortCommitId}'
-               #sh 'docker push uday1kiran/testimage:${env.GIT_BRANCH}-${shortCommitId}'               
-              #}
+              /*script{
+              def shortCommitId = "${env.GIT_COMMIT}".take(7)
+               sh 'docker tag uday1kiran/testimage:${env.GIT_BRANCH} uday1kiran/testimage:${env.GIT_BRANCH}-${shortCommitId}'
+               sh 'docker push uday1kiran/testimage:${env.GIT_BRANCH}-${shortCommitId}'               
+              }*/
                    
               //https://stackoverflow.com/questions/64403659/docker-buildx-image-not-showing-in-docker-image-ls
                 }
