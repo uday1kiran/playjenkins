@@ -50,7 +50,7 @@ pipeline {
             ls -lRt
             docker image ls
             DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t testimage:latest .
-            docker tag testimage:latest newimage:latest
+            #docker tag testimage:latest newimage:latest
             docker image ls
             docker buildx tag testimage:latest newimage:latest
             '''
