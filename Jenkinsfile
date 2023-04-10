@@ -48,18 +48,20 @@ pipeline {
             sh '''
             ls -la
             ls -lRt
-            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                    sh 'docker build -t myimage:latest .'
-                    sh 'docker tag myimage:latest uday1kiran/testimage:latest'
-                    sh 'docker push uday1kiran/testimage:latest'
-                }
-            docker image ls
-            DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --push
-            #docker tag testimage:latest newimage:latest
-            docker buildx image ls
-            #docker buildx tag testimage:latest newimage:latest
             '''
+            withCredentials([usernamePassword(credentialsId: 'testimage', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                    #sh 'docker build -t myimage:latest .'
+                    sh "DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --push"
+                    #sh 'docker tag myimage:latest uday1kiran/testimage:latest'
+                    #sh 'docker push uday1kiran/testimage:latest'
+                }
+            #docker image ls
+            #DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --push
+            ##docker tag testimage:latest newimage:latest
+            #docker buildx image ls
+            #docker buildx tag testimage:latest newimage:latest
+            #'''
           }
         }
       }
