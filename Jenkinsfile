@@ -42,7 +42,8 @@ pipeline {
     stage('Dockerdind Build and Push') {
       steps {
         container('tomcat') {
-          script {
+          //script {
+            sh "echo ${env.BRANCH_NAME}-${env.shortCommitId}"
             sh '''
             ls -la
             ls -lRt
@@ -60,7 +61,7 @@ pipeline {
               }*/
                    
               //https://stackoverflow.com/questions/64403659/docker-buildx-image-not-showing-in-docker-image-ls
-                }
+                //}
           }
         }
       }
