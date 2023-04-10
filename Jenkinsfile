@@ -48,7 +48,7 @@ pipeline {
             ls -la
             ls -lRt
             docker image ls
-            DOCKER_BUILDKIT=1 docker build --progress=plain -no-cache -t testimage:latest .
+            DOCKER_BUILDKIT=1 docker build --progress=plain --no-cache -t testimage:latest .
             docker image ls
             '''
           }
