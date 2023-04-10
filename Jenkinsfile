@@ -47,6 +47,7 @@ pipeline {
                     sh "DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --output type=docker" //--push skipped here
                     sh 'docker image ls'
                     sh 'docker push uday1kiran/testimage:latest'
+              //https://stackoverflow.com/questions/64403659/docker-buildx-image-not-showing-in-docker-image-ls
                 }
           }
         }
