@@ -25,6 +25,7 @@ pipeline {
             '''*/
             sh '''
             #sleep 1m
+            yum install -y git
             docker image ls &&
             docker container ps -a &&
             docker run hello-world &&
