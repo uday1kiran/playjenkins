@@ -24,7 +24,7 @@ pipeline {
             yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             '''*/
             sh '''
-            sleep 1m
+            #sleep 1m
             docker image ls &&
             docker container ps -a &&
             docker run hello-world &&
@@ -48,7 +48,7 @@ pipeline {
             ls -la
             ls -lRt
             docker image ls
-            DOCKER_BUILDKIT=1 docker build -t testimage:latest .
+            DOCKER_BUILDKIT=1 docker build --progress=plain -no-cache -t testimage:latest .
             docker image ls
             '''
           }
