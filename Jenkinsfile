@@ -43,7 +43,7 @@ pipeline {
             ls -lRt
             '''
             withCredentials([usernamePassword(credentialsId: 'testimage', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS''
+                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
                     sh "DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --push"
                 }
           }
