@@ -17,7 +17,7 @@ pipeline {
 
   stages {
 
-    stage('Dockerdind Check') {
+    /*stage('Dockerdind Check') {
       steps {
         container('tomcat') {
           script {
@@ -38,7 +38,7 @@ pipeline {
         }
       }
     }
-    
+    */
     stage('Dockerdind Build and Push') {
       steps {
         container('tomcat') {
@@ -52,7 +52,7 @@ pipeline {
                     sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
                     sh "DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:${env.BRANCH_NAME} . --output type=docker" //--push skipped here
                     sh 'docker image ls'
-                    sh 'docker tag uday1kiran/testimage:${env.BRANCH_NAME}  uday1kiran/testimage:${env.BRANCH_NAME}-${env.shortCommitId}'
+                    sh "docker tag uday1kiran/testimage:${env.BRANCH_NAME}  uday1kiran/testimage:${env.BRANCH_NAME}-${env.shortCommitId}"
                     sh 'docker push uday1kiran/testimage:${env.BRANCH_NAME}-${env.shortCommitId}'
               /*script{
               def shortCommitId = "${env.GIT_COMMIT}".take(7)
