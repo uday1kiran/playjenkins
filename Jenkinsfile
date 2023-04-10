@@ -46,7 +46,7 @@ pipeline {
                     sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
                     sh "DOCKER_BUILDKIT=1 docker buildx build --progress=plain --no-cache -t uday1kiran/testimage:latest . --output type=docker" //--push skipped here
                     sh 'docker image ls'
-                    sh 'DOCKER_BUILDKIT=1  docker buildx image ls'
+                    sh 'docker push uday1kiran/testimage:latest'
                 }
           }
         }
